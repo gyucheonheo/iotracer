@@ -1,0 +1,10 @@
+#!/bin/bash
+
+tracing=/sys/kernel/debug/tracing
+flock=/var/tmp/.ftrace-lock
+
+function warn {
+	 if ! eval "$@"; then
+	      echo >&2 "WARNING: command failed \"$@"\"
+	 fi
+	      

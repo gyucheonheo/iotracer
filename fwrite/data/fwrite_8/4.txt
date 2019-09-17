@@ -1,0 +1,507 @@
+Tracing "SyS_write" for PID 61729... Ctrl-C to end.
+   0)               |  SyS_write() {
+   0)   ==========> |
+   0)               |    smp_irq_work_interrupt() {
+   0)               |      irq_enter() {
+   0)   0.400 us    |        rcu_irq_enter();
+   0)   1.351 us    |      } /* irq_enter */
+   0)               |      __wake_up() {
+   0)               |        __wake_up_common_lock() {
+   0)   0.324 us    |          _raw_spin_lock_irqsave();
+   0)               |          __wake_up_common() {
+   0)               |            autoremove_wake_function() {
+   0)               |              default_wake_function() {
+   0)               |                try_to_wake_up() {
+   0)   0.772 us    |                  _raw_spin_lock_irqsave();
+   0)               |                  select_task_rq_fair() {
+   0)               |                    select_idle_sibling() {
+   0)   0.345 us    |                      idle_cpu();
+   0)   1.003 us    |                    } /* select_idle_sibling */
+   0)   1.905 us    |                  } /* select_task_rq_fair */
+   0)   0.297 us    |                  _raw_spin_lock();
+   0)   0.345 us    |                  update_rq_clock();
+   0)               |                  ttwu_do_activate() {
+   0)               |                    activate_task() {
+   0)               |                      enqueue_task_fair() {
+   0)               |                        enqueue_entity() {
+   0)               |                          update_curr() {
+   0)   0.345 us    |                            update_min_vruntime();
+   0)   0.509 us    |                            cpuacct_charge();
+   0)   2.493 us    |                          } /* update_curr */
+   0)               |                          __update_load_avg_se.isra.38() {
+   0)   0.320 us    |                            decay_load();
+   0)   0.296 us    |                            decay_load();
+   0)   0.308 us    |                            decay_load();
+   0)   0.302 us    |                            __accumulate_pelt_segments();
+   0)   2.869 us    |                          } /* __update_load_avg_se.isra.38 */
+   0)   0.317 us    |                          update_cfs_group();
+   0)   0.483 us    |                          account_entity_enqueue();
+   0)   0.350 us    |                          place_entity();
+   0)   0.339 us    |                          __enqueue_entity();
+   0)   9.246 us    |                        } /* enqueue_entity */
+   0)   0.417 us    |                        __update_load_avg_se.isra.38();
+   0)               |                        update_cfs_group() {
+   0)               |                          reweight_entity() {
+   0)               |                            update_curr() {
+   0)   0.299 us    |                              update_min_vruntime();
+   0)   0.988 us    |                            } /* update_curr */
+   0)   0.338 us    |                            account_entity_dequeue();
+   0)   0.326 us    |                            account_entity_enqueue();
+   0)   3.004 us    |                          } /* reweight_entity */
+   0)   3.789 us    |                        } /* update_cfs_group */
+   0)   0.298 us    |                        hrtick_update();
+   0) + 15.915 us   |                      } /* enqueue_task_fair */
+   0) + 16.656 us   |                    } /* activate_task */
+   0)               |                    ttwu_do_wakeup() {
+   0)               |                      check_preempt_curr() {
+   0)               |                        check_preempt_wakeup() {
+   0)   0.329 us    |                          update_curr();
+   0)   0.346 us    |                          wakeup_preempt_entity.isra.69();
+   0)   1.627 us    |                        } /* check_preempt_wakeup */
+   0)   2.418 us    |                      } /* check_preempt_curr */
+   0)   3.570 us    |                    } /* ttwu_do_wakeup */
+   0) + 21.168 us   |                  } /* ttwu_do_activate */
+   0)   0.301 us    |                  ttwu_stat();
+   0)   0.320 us    |                  _raw_spin_unlock_irqrestore();
+   0) + 28.002 us   |                } /* try_to_wake_up */
+   0) + 28.619 us   |              } /* default_wake_function */
+   0) + 29.252 us   |            } /* autoremove_wake_function */
+   0) + 30.776 us   |          } /* __wake_up_common */
+   0)   0.311 us    |          _raw_spin_unlock_irqrestore();
+   0) + 32.702 us   |        } /* __wake_up_common_lock */
+   0) + 33.448 us   |      } /* __wake_up */
+   0)               |      irq_exit() {
+   0)   0.311 us    |        idle_cpu();
+   0)   0.332 us    |        rcu_irq_exit();
+   0)   1.575 us    |      } /* irq_exit */
+   0) + 40.582 us   |    } /* smp_irq_work_interrupt */
+   0)   <========== |
+   0)               |    __fdget_pos() {
+   0)   0.406 us    |      __fget_light();
+   0)   1.038 us    |    } /* __fdget_pos */
+   0)               |    vfs_write() {
+   0)               |      rw_verify_area() {
+   0)               |        security_file_permission() {
+   0)               |          apparmor_file_permission() {
+   0)               |            common_file_perm() {
+   0)   0.692 us    |              aa_file_perm();
+   0)   1.512 us    |            } /* common_file_perm */
+   0)   3.056 us    |          } /* apparmor_file_permission */
+   0)   4.112 us    |        } /* security_file_permission */
+   0)   4.878 us    |      } /* rw_verify_area */
+   0)               |      __sb_start_write() {
+   0)               |        _cond_resched() {
+   0)   0.305 us    |          rcu_all_qs();
+   0)   0.892 us    |        } /* _cond_resched */
+   0)   2.509 us    |      } /* __sb_start_write */
+   0)               |      __vfs_write() {
+   0)               |        new_sync_write() {
+   0)               |          ext4_file_write_iter() {
+   0)   0.303 us    |            down_write_trylock();
+   0)   0.611 us    |            ext4_write_checks();
+   0)               |            __generic_file_write_iter() {
+   0)   0.323 us    |              file_remove_privs();
+   0)               |              file_update_time() {
+   0)               |                current_time() {
+   0)   0.323 us    |                  current_kernel_time64();
+   0)   0.382 us    |                  timespec_trunc();
+   0)   2.063 us    |                } /* current_time */
+   0)               |                __mnt_want_write_file() {
+   0)   0.298 us    |                  __mnt_is_readonly.part.13();
+   0)   1.458 us    |                } /* __mnt_want_write_file */
+   0)               |                generic_update_time() {
+   0)               |                  __mark_inode_dirty() {
+   0)               |                    ext4_dirty_inode() {
+   0)               |                      __ext4_journal_start_sb() {
+   0)               |                        ext4_journal_check_start() {
+   0)               |                          _cond_resched() {
+   0)   0.298 us    |                            rcu_all_qs();
+   0)   0.864 us    |                          } /* _cond_resched */
+   0)   1.828 us    |                        } /* ext4_journal_check_start */
+   0)               |                        jbd2__journal_start() {
+   0)               |                          kmem_cache_alloc() {
+   0)               |                            _cond_resched() {
+   0)   0.304 us    |                              rcu_all_qs();
+   0)   0.888 us    |                            } /* _cond_resched */
+   0)   0.391 us    |                            prefetch_freepointer();
+   0)   3.144 us    |                          } /* kmem_cache_alloc */
+   0)               |                          start_this_handle() {
+   0)   0.298 us    |                            _raw_read_lock();
+   0)   0.558 us    |                            add_transaction_credits();
+   0)   2.007 us    |                          } /* start_this_handle */
+   0)   6.513 us    |                        } /* jbd2__journal_start */
+   0)   9.485 us    |                      } /* __ext4_journal_start_sb */
+   0)               |                      ext4_mark_inode_dirty() {
+   0)               |                        _cond_resched() {
+   0)   0.302 us    |                          rcu_all_qs();
+   0)   0.883 us    |                        } /* _cond_resched */
+   0)               |                        ext4_reserve_inode_write() {
+   0)               |                          __ext4_get_inode_loc() {
+   0)   1.062 us    |                            ext4_get_group_desc();
+   0)   0.917 us    |                            ext4_inode_table();
+   0)               |                            __getblk_gfp() {
+   0)               |                              __find_get_block() {
+   0)               |                                pagecache_get_page() {
+   0)   2.487 us    |                                  find_get_entry();
+   0)   0.385 us    |                                  mark_page_accessed();
+   0)   3.909 us    |                                } /* pagecache_get_page */
+   0)   0.308 us    |                                _raw_spin_lock();
+   0)   0.394 us    |                                __brelse();
+   0)   8.442 us    |                              } /* __find_get_block */
+   0)               |                              _cond_resched() {
+   0)   0.314 us    |                                rcu_all_qs();
+   0)   0.895 us    |                              } /* _cond_resched */
+   0) + 10.302 us   |                            } /* __getblk_gfp */
+   0) + 14.516 us   |                          } /* __ext4_get_inode_loc */
+   0)               |                          __ext4_journal_get_write_access() {
+   0)               |                            _cond_resched() {
+   0)   0.296 us    |                              rcu_all_qs();
+   0)   0.883 us    |                            } /* _cond_resched */
+   0)               |                            jbd2_journal_get_write_access() {
+   0)   0.880 us    |                              jbd2_journal_add_journal_head();
+   0)               |                              do_get_write_access() {
+   0)               |                                _cond_resched() {
+   0)   0.301 us    |                                  rcu_all_qs();
+   0)   0.877 us    |                                } /* _cond_resched */
+   0)               |                                unlock_buffer() {
+   0)               |                                  wake_up_bit() {
+   0)   0.454 us    |                                    __wake_up_bit();
+   0)   1.061 us    |                                  } /* wake_up_bit */
+   0)   1.646 us    |                                } /* unlock_buffer */
+   0)   0.299 us    |                                _raw_spin_lock();
+   0)               |                                __jbd2_journal_file_buffer() {
+   0)   0.311 us    |                                  jbd2_journal_grab_journal_head();
+   0)   1.185 us    |                                } /* __jbd2_journal_file_buffer */
+   0)   0.334 us    |                                jbd2_journal_cancel_revoke();
+   0)   6.515 us    |                              } /* do_get_write_access */
+   0)   0.612 us    |                              jbd2_journal_put_journal_head();
+   0)   9.683 us    |                            } /* jbd2_journal_get_write_access */
+   0) + 11.470 us   |                          } /* __ext4_journal_get_write_access */
+   0) + 27.056 us   |                        } /* ext4_reserve_inode_write */
+   0)               |                        ext4_mark_iloc_dirty() {
+   0)               |                          ext4_do_update_inode() {
+   0)   0.292 us    |                            _raw_spin_lock();
+   0)               |                            from_kuid() {
+   0)   0.352 us    |                              map_id_up();
+   0)   0.946 us    |                            } /* from_kuid */
+   0)               |                            from_kgid() {
+   0)   0.295 us    |                              map_id_up();
+   0)   0.874 us    |                            } /* from_kgid */
+   0)               |                            from_kprojid() {
+   0)   0.301 us    |                              map_id_up();
+   0)   0.877 us    |                            } /* from_kprojid */
+   0)   0.357 us    |                            ext4_inode_csum_set();
+   0)               |                            __ext4_handle_dirty_metadata() {
+   0)               |                              _cond_resched() {
+   0)   0.301 us    |                                rcu_all_qs();
+   0)   0.931 us    |                              } /* _cond_resched */
+   0)               |                              jbd2_journal_dirty_metadata() {
+   0)   0.317 us    |                                _raw_spin_lock();
+   0)               |                                __jbd2_journal_file_buffer() {
+   0)   0.394 us    |                                  __jbd2_journal_temp_unlink_buffer();
+   0)   1.415 us    |                                } /* __jbd2_journal_file_buffer */
+   0)   2.778 us    |                              } /* jbd2_journal_dirty_metadata */
+   0)   4.607 us    |                            } /* __ext4_handle_dirty_metadata */
+   0)   0.292 us    |                            __brelse();
+   0) + 11.735 us   |                          } /* ext4_do_update_inode */
+   0) + 12.430 us   |                        } /* ext4_mark_iloc_dirty */
+   0) + 41.620 us   |                      } /* ext4_mark_inode_dirty */
+   0)               |                      __ext4_journal_stop() {
+   0)               |                        jbd2_journal_stop() {
+   0)               |                          __wake_up() {
+   0)               |                            __wake_up_common_lock() {
+   0)   0.294 us    |                              _raw_spin_lock_irqsave();
+   0)   0.323 us    |                              __wake_up_common();
+   0)   0.309 us    |                              _raw_spin_unlock_irqrestore();
+   0)   2.112 us    |                            } /* __wake_up_common_lock */
+   0)   2.687 us    |                          } /* __wake_up */
+   0)   0.741 us    |                          kmem_cache_free();
+   0)   4.721 us    |                        } /* jbd2_journal_stop */
+   0)   5.433 us    |                      } /* __ext4_journal_stop */
+   0) + 57.977 us   |                    } /* ext4_dirty_inode */
+   0) + 59.006 us   |                  } /* __mark_inode_dirty */
+   0) + 59.835 us   |                } /* generic_update_time */
+   0)   0.318 us    |                __mnt_drop_write_file();
+   0) + 65.699 us   |              } /* file_update_time */
+   0)               |              generic_perform_write() {
+   0)               |                ext4_da_write_begin() {
+   0)   0.390 us    |                  ext4_nonda_switch();
+   0)               |                  grab_cache_page_write_begin() {
+   0)               |                    pagecache_get_page() {
+   0)   0.338 us    |                      find_get_entry();
+   0)               |                      __page_cache_alloc() {
+   0)               |                        alloc_pages_current() {
+   0)   0.341 us    |                          get_task_policy.part.27();
+   0)   0.307 us    |                          policy_nodemask();
+   0)   0.335 us    |                          policy_node();
+   0)               |                          __alloc_pages_nodemask() {
+   0)               |                            _cond_resched() {
+   0)   0.295 us    |                              rcu_all_qs();
+   0)   0.871 us    |                            } /* _cond_resched */
+   0)               |                            get_page_from_freelist() {
+   0)               |                              node_dirty_ok() {
+   0)   0.308 us    |                                node_page_state();
+   0)   0.298 us    |                                node_page_state();
+   0)   0.291 us    |                                node_page_state();
+   0)   0.304 us    |                                node_page_state();
+   0)   0.302 us    |                                node_page_state();
+   0)   4.056 us    |                              } /* node_dirty_ok */
+   0)   0.298 us    |                              __inc_numa_state();
+   0)   0.307 us    |                              __inc_numa_state();
+   0)   6.305 us    |                            } /* get_page_from_freelist */
+   0)   8.125 us    |                          } /* __alloc_pages_nodemask */
+   0) + 10.666 us   |                        } /* alloc_pages_current */
+   0) + 11.351 us   |                      } /* __page_cache_alloc */
+   0)               |                      add_to_page_cache_lru() {
+   0)               |                        __add_to_page_cache_locked() {
+   0)   0.339 us    |                          PageHuge();
+   0)               |                          mem_cgroup_try_charge() {
+   0)   0.437 us    |                            get_mem_cgroup_from_mm();
+   0)   1.607 us    |                            try_charge();
+   0)   3.017 us    |                          } /* mem_cgroup_try_charge */
+   0)   0.305 us    |                          _raw_spin_lock_irq();
+   0)               |                          page_cache_tree_insert() {
+   0)   0.303 us    |                            shmem_mapping();
+   0)   1.673 us    |                          } /* page_cache_tree_insert */
+   0)               |                          __inc_node_page_state() {
+   0)   0.301 us    |                            __inc_node_state();
+   0)   0.988 us    |                          } /* __inc_node_page_state */
+   0)               |                          mem_cgroup_commit_charge() {
+   0)   0.339 us    |                            mem_cgroup_charge_statistics();
+   0)   0.286 us    |                            memcg_check_events();
+   0)   1.523 us    |                          } /* mem_cgroup_commit_charge */
+   0) + 10.965 us   |                        } /* __add_to_page_cache_locked */
+   0)               |                        lru_cache_add() {
+   0)   0.311 us    |                          __lru_cache_add();
+   0)   0.898 us    |                        } /* lru_cache_add */
+   0) + 12.837 us   |                      } /* add_to_page_cache_lru */
+   0) + 26.289 us   |                    } /* pagecache_get_page */
+   0)   0.308 us    |                    wait_for_stable_page();
+   0) + 27.666 us   |                  } /* grab_cache_page_write_begin */
+   0)   0.301 us    |                  unlock_page();
+   0)               |                  __ext4_journal_start_sb() {
+   0)               |                    ext4_journal_check_start() {
+   0)               |                      _cond_resched() {
+   0)   0.294 us    |                        rcu_all_qs();
+   0)   0.878 us    |                      } /* _cond_resched */
+   0)   1.512 us    |                    } /* ext4_journal_check_start */
+   0)               |                    jbd2__journal_start() {
+   0)               |                      kmem_cache_alloc() {
+   0)               |                        _cond_resched() {
+   0)   0.289 us    |                          rcu_all_qs();
+   0)   0.865 us    |                        } /* _cond_resched */
+   0)   0.304 us    |                        prefetch_freepointer();
+   0)   2.108 us    |                      } /* kmem_cache_alloc */
+   0)               |                      start_this_handle() {
+   0)   0.292 us    |                        _raw_read_lock();
+   0)   0.298 us    |                        add_transaction_credits();
+   0)   1.512 us    |                      } /* start_this_handle */
+   0)   4.515 us    |                    } /* jbd2__journal_start */
+   0)   6.897 us    |                  } /* __ext4_journal_start_sb */
+   0)               |                  _cond_resched() {
+   0)   0.289 us    |                    rcu_all_qs();
+   0)   0.877 us    |                  } /* _cond_resched */
+   0)   0.289 us    |                  wait_for_stable_page();
+   0)               |                  ext4_block_write_begin() {
+   0)               |                    create_empty_buffers() {
+   0)               |                      alloc_page_buffers() {
+   0)               |                        alloc_buffer_head() {
+   0)               |                          kmem_cache_alloc() {
+   0)               |                            _cond_resched() {
+   0)   0.348 us    |                              rcu_all_qs();
+   0)   0.932 us    |                            } /* _cond_resched */
+   0)   0.395 us    |                            prefetch_freepointer();
+   0)   2.595 us    |                          } /* kmem_cache_alloc */
+   0)   3.327 us    |                        } /* alloc_buffer_head */
+   0)   3.958 us    |                      } /* alloc_page_buffers */
+   0)   0.302 us    |                      _raw_spin_lock();
+   0)   5.314 us    |                    } /* create_empty_buffers */
+   0)               |                    ext4_da_get_block_prep() {
+   0)               |                      ext4_es_lookup_extent() {
+   0)   0.298 us    |                        _raw_read_lock();
+   0)   1.246 us    |                      } /* ext4_es_lookup_extent */
+   0)               |                      down_read() {
+   0)               |                        _cond_resched() {
+   0)   0.295 us    |                          rcu_all_qs();
+   0)   0.867 us    |                        } /* _cond_resched */
+   0)   1.489 us    |                      } /* down_read */
+   0)               |                      ext4_ext_map_blocks() {
+   0)               |                        ext4_find_extent() {
+   0)               |                          __kmalloc() {
+   0)   0.626 us    |                            kmalloc_slab();
+   0)               |                            _cond_resched() {
+   0)   0.300 us    |                              rcu_all_qs();
+   0)   0.905 us    |                            } /* _cond_resched */
+   0)   3.595 us    |                          } /* __kmalloc */
+   0)   4.481 us    |                        } /* ext4_find_extent */
+   0)               |                        ext4_ext_put_gap_in_cache() {
+   0)               |                          ext4_es_find_delayed_extent_range() {
+   0)   0.286 us    |                            _raw_read_lock();
+   0)   0.286 us    |                            __es_tree_search();
+   0)   1.517 us    |                          } /* ext4_es_find_delayed_extent_range */
+   0)               |                          ext4_es_insert_extent() {
+   0)   0.320 us    |                            _raw_write_lock();
+   0)               |                            __es_remove_extent() {
+   0)   0.329 us    |                              __es_tree_search();
+   0)   0.991 us    |                            } /* __es_remove_extent */
+   0)               |                            __es_insert_extent() {
+   0)               |                              kmem_cache_alloc() {
+   0)   0.381 us    |                                prefetch_freepointer();
+   0)   1.554 us    |                              } /* kmem_cache_alloc */
+   0)   0.384 us    |                              _raw_spin_lock();
+   0)   3.449 us    |                            } /* __es_insert_extent */
+   0)   6.716 us    |                          } /* ext4_es_insert_extent */
+   0)   9.305 us    |                        } /* ext4_ext_put_gap_in_cache */
+   0)   0.336 us    |                        ext4_ext_drop_refs();
+   0)   0.643 us    |                        kfree();
+   0) + 17.512 us   |                      } /* ext4_ext_map_blocks */
+   0)               |                      __dquot_alloc_space() {
+   0)   0.317 us    |                        _raw_spin_lock();
+   0)               |                        inode_reserved_space() {
+   0)   0.305 us    |                          ext4_get_reserved_space();
+   0)   1.083 us    |                        } /* inode_reserved_space */
+   0)   2.698 us    |                      } /* __dquot_alloc_space */
+   0)   0.289 us    |                      _raw_spin_lock();
+   0)               |                      ext4_claim_free_clusters() {
+   0)   0.357 us    |                        ext4_has_free_clusters();
+   0)   1.056 us    |                      } /* ext4_claim_free_clusters */
+   0)               |                      ext4_es_insert_extent() {
+   0)   0.312 us    |                        _raw_write_lock();
+   0)               |                        __es_remove_extent() {
+   0)   0.351 us    |                          __es_tree_search();
+   0)   1.012 us    |                        } /* __es_remove_extent */
+   0)               |                        __es_insert_extent() {
+   0)   0.310 us    |                          ext4_es_can_be_merged();
+   0)               |                          kmem_cache_alloc() {
+   0)   0.292 us    |                            prefetch_freepointer();
+   0)   0.906 us    |                          } /* kmem_cache_alloc */
+   0)   2.215 us    |                        } /* __es_insert_extent */
+   0)   4.796 us    |                      } /* ext4_es_insert_extent */
+   0)   0.301 us    |                      up_read();
+   0) + 32.873 us   |                    } /* ext4_da_get_block_prep */
+   0)               |                    clean_bdev_aliases() {
+   0)               |                      pagevec_lookup_range() {
+   0)   0.437 us    |                        find_get_pages_range();
+   0)   1.175 us    |                      } /* pagevec_lookup_range */
+   0)   1.929 us    |                    } /* clean_bdev_aliases */
+   0) + 42.797 us   |                  } /* ext4_block_write_begin */
+   0) + 82.084 us   |                } /* ext4_da_write_begin */
+   0)               |                ext4_da_write_end() {
+   0)               |                  generic_write_end() {
+   0)               |                    block_write_end() {
+   0)               |                      __block_commit_write.isra.31() {
+   0)               |                        mark_buffer_dirty() {
+   0)   0.294 us    |                          lock_page_memcg();
+   0)   0.326 us    |                          page_mapping();
+   0)               |                          __set_page_dirty() {
+   0)   0.292 us    |                            _raw_spin_lock_irqsave();
+   0)               |                            account_page_dirtied() {
+   0)   0.333 us    |                              __mod_node_page_state();
+   0)               |                              __inc_zone_page_state() {
+   0)   0.292 us    |                                __inc_zone_state();
+   0)   0.863 us    |                              } /* __inc_zone_page_state */
+   0)               |                              __inc_node_page_state() {
+   0)   0.286 us    |                                __inc_node_state();
+   0)   0.874 us    |                              } /* __inc_node_page_state */
+   0)   4.047 us    |                            } /* account_page_dirtied */
+   0)   0.320 us    |                            _raw_spin_unlock_irqrestore();
+   0)   6.062 us    |                          } /* __set_page_dirty */
+   0)   0.305 us    |                          unlock_page_memcg();
+   0)   0.448 us    |                          __mark_inode_dirty();
+   0)   9.354 us    |                        } /* mark_buffer_dirty */
+   0) + 10.012 us   |                      } /* __block_commit_write.isra.31 */
+   0) + 10.693 us   |                    } /* block_write_end */
+   0)   0.299 us    |                    unlock_page();
+   0)               |                    __mark_inode_dirty() {
+   0)               |                      ext4_dirty_inode() {
+   0)               |                        __ext4_journal_start_sb() {
+   0)               |                          ext4_journal_check_start() {
+   0)               |                            _cond_resched() {
+   0)   0.297 us    |                              rcu_all_qs();
+   0)   0.877 us    |                            } /* _cond_resched */
+   0)   1.460 us    |                          } /* ext4_journal_check_start */
+   0)   0.332 us    |                          jbd2__journal_start();
+   0)   2.663 us    |                        } /* __ext4_journal_start_sb */
+   0)               |                        ext4_mark_inode_dirty() {
+   0)               |                          _cond_resched() {
+   0)   0.296 us    |                            rcu_all_qs();
+   0)   0.880 us    |                          } /* _cond_resched */
+   0)               |                          ext4_reserve_inode_write() {
+   0)               |                            __ext4_get_inode_loc() {
+   0)   0.309 us    |                              ext4_get_group_desc();
+   0)   0.320 us    |                              ext4_inode_table();
+   0)               |                              __getblk_gfp() {
+   0)               |                                __find_get_block() {
+   0)   0.360 us    |                                  mark_page_accessed();
+   0)   1.090 us    |                                } /* __find_get_block */
+   0)               |                                _cond_resched() {
+   0)   0.388 us    |                                  rcu_all_qs();
+   0)   1.008 us    |                                } /* _cond_resched */
+   0)   3.004 us    |                              } /* __getblk_gfp */
+   0)   5.255 us    |                            } /* __ext4_get_inode_loc */
+   0)               |                            __ext4_journal_get_write_access() {
+   0)               |                              _cond_resched() {
+   0)   0.320 us    |                                rcu_all_qs();
+   0)   0.896 us    |                              } /* _cond_resched */
+   0)               |                              jbd2_journal_get_write_access() {
+   0)   0.345 us    |                                jbd2_write_access_granted.part.9();
+   0)   0.972 us    |                              } /* jbd2_journal_get_write_access */
+   0)   2.751 us    |                            } /* __ext4_journal_get_write_access */
+   0)   8.891 us    |                          } /* ext4_reserve_inode_write */
+   0)               |                          ext4_mark_iloc_dirty() {
+   0)               |                            ext4_do_update_inode() {
+   0)   0.295 us    |                              _raw_spin_lock();
+   0)               |                              from_kuid() {
+   0)   0.302 us    |                                map_id_up();
+   0)   0.880 us    |                              } /* from_kuid */
+   0)               |                              from_kgid() {
+   0)   0.305 us    |                                map_id_up();
+   0)   0.901 us    |                              } /* from_kgid */
+   0)               |                              from_kprojid() {
+   0)   0.306 us    |                                map_id_up();
+   0)   0.897 us    |                              } /* from_kprojid */
+   0)   0.305 us    |                              ext4_inode_csum_set();
+   0)               |                              __ext4_handle_dirty_metadata() {
+   0)               |                                _cond_resched() {
+   0)   0.298 us    |                                  rcu_all_qs();
+   0)   0.887 us    |                                } /* _cond_resched */
+   0)   0.357 us    |                                jbd2_journal_dirty_metadata();
+   0)   2.143 us    |                              } /* __ext4_handle_dirty_metadata */
+   0)   0.352 us    |                              __brelse();
+   0)   8.299 us    |                            } /* ext4_do_update_inode */
+   0)   8.897 us    |                          } /* ext4_mark_iloc_dirty */
+   0) + 19.867 us   |                        } /* ext4_mark_inode_dirty */
+   0)               |                        __ext4_journal_stop() {
+   0)   0.327 us    |                          jbd2_journal_stop();
+   0)   0.923 us    |                        } /* __ext4_journal_stop */
+   0) + 24.631 us   |                      } /* ext4_dirty_inode */
+   0) + 25.338 us   |                    } /* __mark_inode_dirty */
+   0) + 37.630 us   |                  } /* generic_write_end */
+   0)               |                  __ext4_journal_stop() {
+   0)               |                    jbd2_journal_stop() {
+   0)               |                      __wake_up() {
+   0)               |                        __wake_up_common_lock() {
+   0)   0.291 us    |                          _raw_spin_lock_irqsave();
+   0)   0.335 us    |                          __wake_up_common();
+   0)   0.308 us    |                          _raw_spin_unlock_irqrestore();
+   0)   2.166 us    |                        } /* __wake_up_common_lock */
+   0)   2.730 us    |                      } /* __wake_up */
+   0)   0.330 us    |                      kmem_cache_free();
+   0)   4.029 us    |                    } /* jbd2_journal_stop */
+   0)   4.619 us    |                  } /* __ext4_journal_stop */
+   0) + 43.408 us   |                } /* ext4_da_write_end */
+   0)               |                _cond_resched() {
+   0)   0.294 us    |                  rcu_all_qs();
+   0)   0.890 us    |                } /* _cond_resched */
+   0)   0.495 us    |                balance_dirty_pages_ratelimited();
+   0) ! 130.071 us  |              } /* generic_perform_write */
+   0) ! 197.678 us  |            } /* __generic_file_write_iter */
+   0)   0.313 us    |            up_write();
+   0) ! 201.246 us  |          } /* ext4_file_write_iter */
+   0) ! 202.534 us  |        } /* new_sync_write */
+   0) ! 203.431 us  |      } /* __vfs_write */
+   0)   0.326 us    |      __fsnotify_parent();
+   0)   0.505 us    |      fsnotify();
+   0)   0.314 us    |      __sb_end_write();
+   0) ! 215.032 us  |    } /* vfs_write */
+   0) ! 268.464 us  |  } /* SyS_write */
