@@ -9,7 +9,7 @@
 	echo ${pid1}
 	sleep 1
 	./funcgraph -p ${pid1} SyS_open > ./data/simple/test.dat &
-	sleep 11
+	sleep 1
 	pid2=$!
 
 	kill -9 ${pid2}
