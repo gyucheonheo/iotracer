@@ -18,6 +18,8 @@ do
     do
 	pkill cat
 	./reset-ftrace -f -q
+	sync
+	echo 3 > /proc/sys/vm/drop_caches
 	touch ./data/fread_${size}/${index}.txt
 	./fread_${size} &
 	pid1=$!
