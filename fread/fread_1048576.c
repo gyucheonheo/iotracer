@@ -4,7 +4,7 @@
 #include <string.h>
 #define SZ 1048576
 
-int main(){
+int main(int argc, char** argv){
   FILE *fd = fopen("test1048576.txt", "w+");
   char *buf = malloc(sizeof(char)*SZ);
 

@@ -4,7 +4,7 @@
 #include <string.h>
 #define SZ 64
 
-int main(){
+int main(int argc, char **argv){
   FILE *fd = fopen("test64.txt", "w+");
   char *buf = malloc(sizeof(char)*SZ);
 
