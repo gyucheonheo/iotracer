@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 #define SZ 32768
 
-int main(){
+int main(int argc, char** argv){
   FILE *fd = fopen("test.txt", "w");
   char *buf = malloc(sizeof(char)*SZ);
-  sleep(10);
+  sleep(atoi(argv[1]));
   fwrite(buf, SZ, 1, fd);
   fclose(fd);
 }
