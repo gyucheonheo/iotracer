@@ -1,1 +1,0 @@
-Tracing "SyS_open" for PID 80786... Ctrl-C to end.
