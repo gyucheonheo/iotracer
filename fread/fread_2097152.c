@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 #define SZ 2097152
 
 int main(){
@@ -8,7 +9,7 @@ int main(){
   char *buf = malloc(sizeof(char)*SZ);
 
   fwrite(buf, SZ, 1, fd);
-  sleep(10);
+  sleep(atoi(argv[1]));
   fread(buf, SZ, 1, fd);
   fclose(fd);
 }

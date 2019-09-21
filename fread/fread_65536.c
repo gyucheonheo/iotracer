@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 #define SZ 65536
 
 int main(){
   FILE *fd = fopen("test65536.txt", "w+");
   char *buf = malloc(sizeof(char)*SZ);
   fwrite(buf, SZ, 1, fd);
-  sleep(10);
+  sleep(atoi(argv[1]));
   fread(buf, SZ, 1, fd);
   fclose(fd);
 }
