@@ -48,54 +48,57 @@ done
 
 if [ "fopen" == ${fnc} ]; then
     syscall="SyS_open"
-fi
-if [ "fread" == ${fnc} ]; then
+elif [ "fread" == ${fnc} ]; then
     syscall="SyS_read"
-fi
-if [ "fwrite" == ${fnc} ]; then
-    sysacll="SyS_write"
+elif [ "fwrite" == ${fnc} ]; then
+    syscall="SyS_write"
+else
+    echo "ERROR: No support for this routine"
+    exit 1
 fi
 
 dirc=$(pwd)
 cd $tracing || die "ERROR: Are you Root user? Kernel has ftrace?"
-
 cd ${dirc} # comeback
 
 if [ ! -d ./${fnc}/data/${fnc}_${option} ]; then
     mkdir -p ./${fnc}/data/${fnc}_${option}
 fi
 
-echo option : ${option}
+echo "INFO: syscall :" ${syscall}
+echo "INFO: option  : "${option}
 
 if [ ! -f ./${fnc}/${fnc}_${option}.c ]; then
     echo "ERROR: file not exist!"
-    exit
+    exit 1
 fi
+
 cd ./${fnc} # go 
 
 gcc ./${fnc}_${option}.c -o ./${fnc}_${option}
 
-cd ${dirc} # back
+cd .. # back
+
 index=1
 
 while [ $index -le 1 ];
 do
     echo ${syscall}
-    echo "INF: Unlock existing ftrace"
+    echo "INFO: Unlock existing ftrace"
     pkill cat
     ./reset-ftrace -f -q
-    echo "INF: Drop caches"
+    echo "INFO: Drop caches"
     sync
     echo 3 > /proc/sys/vm/drop_caches
     touch ./${fnc}/data/${fnc}_${option}/${index}.txt
 
     cd ./${fnc} # go
-    ./${fnc}_${option} &
+    ./${fnc}_${option} 1 &
     pid1=$!
     cd ../ # back
-    sleep 1
+    sleep 0.2 
     ./funcgraph -p ${pid1} -T ${syscall} > ./${fnc}/data/${fnc}_${option}/${index}.txt &
-    sleep 10
+    sleep 1 
     pid2=$!
     kill -9 ${pid2}
     wait $pid2
