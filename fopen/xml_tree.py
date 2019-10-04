@@ -73,6 +73,7 @@ def parser():
                 func_name[0] = func_name[0].replace("()", "")
                 root = {}
                 root["name"] = func_name[0]
+		root["parent"] ="root" 
                 root["value"] = 0
                 root["children"] =[]
                 dfs(c+1, data, root, func_name[0])
@@ -91,6 +92,7 @@ def dfs(i, data, parent, p_name):
             func_name[0] = func_name[0].replace("()","")
             item={}
             item["name"] = func_name[0]
+	    item["parent"] = p_name
             item["value"] = 0
             item["children"] = []
             parent["children"].append(item)
@@ -101,11 +103,12 @@ def dfs(i, data, parent, p_name):
             func_name[0] = func_name[0].replace(";","")
             leaf = {}
             leaf["name"] = func_name[0]
+	    leaf["parent"] = p_name
             leaf["value"] = float(exec_time[0])
             parent["children"].append(leaf)
             i+=1
         elif (len(func_end) == 1 ):
-            parent["size"] = float(exec_time[0])
+            parent["value"] = float(exec_time[0])
             return i+1
         else:
             i+=1
