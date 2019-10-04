@@ -52,8 +52,8 @@ def parser():
     for d in dir_list:
         dir_count = len(os.listdir(path+str(d)))
         inf = {}
-        for i in range (0,1):
-            f = open(path+str(d)+"/test_"+str(i)+".dat", "r")
+        for i in range (1,2):
+            f = open(path+str(d)+"/"+str(i)+".txt", "r")
             data = []
             stack = []
             for line in f:
